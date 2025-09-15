@@ -1,0 +1,671 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Orange & Blue Theme Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse-orange {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes pulse-blue {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Premium homepage animations */
+@keyframes premium-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Updated font imports to include Space Grotesk and DM Sans for modern Retailer Studio */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* Updated color system to match Retailer Studio design brief with teal and orange theme */
+:root {
+  /* Modern Retailer Studio Color System - Teal & Orange */
+  --retailer-teal: #0891b2;
+  --retailer-teal-light: #06b6d4;
+  --retailer-teal-dark: #0e7490;
+  --retailer-orange: #ea580c;
+  --retailer-orange-light: #f97316;
+  --retailer-orange-dark: #c2410c;
+
+  /* Glassmorphism backgrounds for modern dashboard */
+  --glass-bg: rgba(255, 255, 255, 0.95);
+  --glass-bg-dark: rgba(249, 250, 251, 0.98);
+  --glass-border: rgba(8, 145, 178, 0.1);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+
+  /* Retailer Studio Premium Colors */
+  --studio-primary: #0891b2;
+  --studio-primary-light: #06b6d4;
+  --studio-primary-dark: #0e7490;
+  --studio-accent: #ea580c;
+  --studio-accent-light: #f97316;
+  --studio-accent-dark: #c2410c;
+
+  --studio-white: #ffffff;
+  --studio-light-grey: #f9fafb;
+  --studio-medium-grey: #e5e7eb;
+  --studio-dark-grey: #4b5563;
+  --studio-text-primary: #000000;
+  --studio-text-secondary: #000000;
+
+  /* Theme Variables for Retailer Studio */
+  --studio-bg-primary: var(--studio-white);
+  --studio-bg-secondary: var(--studio-light-grey);
+  --studio-border: var(--studio-medium-grey);
+  --studio-ring: rgba(8, 145, 178, 0.5);
+}
+
+[data-theme="dark"] {
+  --glass-bg: rgba(30, 41, 59, 0.95);
+  --glass-bg-dark: rgba(51, 65, 85, 0.98);
+  --glass-border: rgba(8, 145, 178, 0.2);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+  --studio-bg-primary: #1e293b;
+  --studio-bg-secondary: #334155;
+  --studio-text-primary: #f1f5f9;
+  --studio-text-secondary: #cbd5e1;
+  --studio-border: #475569;
+  --studio-ring: rgba(6, 182, 212, 0.5);
+}
+
+@layer components {
+  /* Updated typography system for Retailer Studio */
+  .font-heading {
+    font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-feature-settings: "liga" on, "kern" on;
+    font-weight: 600;
+  }
+
+  .font-body {
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-feature-settings: "liga" on, "kern" on;
+    font-weight: 400;
+  }
+
+  .font-sans {
+    font-family: "DM Sans", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-feature-settings: "liga" on, "kern" on;
+  }
+
+  /* Professional Typography */
+  .font-serif {
+    font-family: "Playfair Display", "Cormorant Garamond", serif;
+    font-feature-settings: "liga" on, "kern" on;
+  }
+
+  .font-royal {
+    font-family: "Cormorant Garamond", "Playfair Display", serif;
+    font-feature-settings: "liga" on, "kern" on, "swsh" on;
+  }
+
+  .font-luxury {
+    font-family: "Crimson Text", "Playfair Display", serif;
+    font-feature-settings: "liga" on, "kern" on, "oldstyle-nums" on;
+  }
+
+  .font-luxury-serif {
+    font-family: "Playfair Display", "Cormorant Garamond", serif;
+    font-feature-settings: "liga" on, "kern" on;
+  }
+
+  /* Enhanced glassmorphism card styles for Retailer Studio */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    background: var(--glass-bg-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+    border-color: rgba(8, 145, 178, 0.2);
+  }
+
+  .glass-sidebar {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-right: 1px solid var(--glass-border);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Premium Listings Background System */
+  .premium-bg-light {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(255, 255, 255, 0.95) 20%,
+      rgba(248, 250, 252, 1) 100%
+    );
+  }
+
+  .premium-bg-dark {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 1) 0%, rgba(30, 41, 59, 0.95) 50%, rgba(51, 65, 85, 0.9) 100%);
+  }
+
+  .premium-overlay-light {
+    background: linear-gradient(
+      145deg,
+      rgba(59, 130, 246, 0.08) 0%,
+      rgba(212, 175, 55, 0.04) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+  }
+
+  .premium-overlay-dark {
+    background: linear-gradient(
+      145deg,
+      rgba(251, 191, 36, 0.08) 0%,
+      rgba(16, 185, 129, 0.04) 50%,
+      rgba(15, 23, 42, 0.1) 100%
+    );
+  }
+
+  /* 3D Metallic Gold Logo Treatment */
+  .logo-3d-premium {
+    background: var(--metallic-gold-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(212, 175, 55, 0.3), 0 4px 8px rgba(184, 134, 11, 0.2);
+    filter: drop-shadow(0 2px 4px rgba(212, 175, 55, 0.4));
+    position: relative;
+  }
+
+  [data-theme="dark"] .logo-3d-premium {
+    background: var(--sunlit-gold-gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    text-shadow: 0 2px 4px rgba(251, 191, 36, 0.4), 0 4px 8px rgba(245, 158, 11, 0.3);
+    filter: drop-shadow(0 2px 4px rgba(251, 191, 36, 0.5));
+  }
+
+  .logo-3d-premium::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 25%, rgba(255, 255, 255, 0.3) 50%, transparent 75%);
+    animation: shimmerSweep 3s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  /* Premium Cards */
+  .premium-card {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.9) 100%);
+    backdrop-filter: blur(20px) saturate(1.2);
+    border: 2px solid rgba(59, 130, 246, 0.1);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.08), 0 4px 12px rgba(212, 175, 55, 0.06), inset 0 1px 0
+      rgba(255, 255, 255, 0.8);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="dark"] .premium-card {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%);
+    border: 2px solid rgba(251, 191, 36, 0.15);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3), 0 4px 12px rgba(251, 191, 36, 0.1), inset 0 1px 0
+      rgba(255, 255, 255, 0.1);
+  }
+
+  .premium-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 20px 50px rgba(59, 130, 246, 0.15), 0 8px 20px rgba(212, 175, 55, 0.2), inset 0 1px 0
+      rgba(255, 255, 255, 0.9);
+  }
+
+  [data-theme="dark"] .premium-card:hover {
+    border-color: rgba(251, 191, 36, 0.4);
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.4), 0 8px 20px rgba(251, 191, 36, 0.3), inset 0 1px 0
+      rgba(255, 255, 255, 0.15);
+  }
+
+  /* Enhanced Crown Glow Effect */
+  .crown-glow {
+    color: var(--metallic-gold);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.4));
+    animation: crownPulse 3s ease-in-out infinite;
+  }
+
+  [data-theme="dark"] .crown-glow {
+    color: var(--sunlit-gold);
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.8));
+  }
+
+  /* Premium Buttons */
+  .btn-premium {
+    background: var(--metallic-gold-gradient);
+    color: #1e293b;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-theme="dark"] .btn-premium {
+    background: var(--sunlit-gold-gradient);
+    border: 2px solid rgba(251, 191, 36, 0.4);
+    box-shadow: 0 6px 20px rgba(251, 191, 36, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-premium::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .btn-premium:hover::before {
+    left: 100%;
+  }
+
+  .btn-premium:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(212, 175, 55, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  }
+
+  /* Added Retailer Studio specific button styles */
+  .btn-studio-primary {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-studio-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(8, 145, 178, 0.3);
+    background: hsl(var(--primary) / 0.9);
+  }
+
+  .btn-studio-secondary {
+    background: hsl(var(--secondary));
+    color: hsl(var(--secondary-foreground));
+    font-family: "Space Grotesk", sans-serif;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-studio-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(234, 88, 12, 0.3);
+    background: hsl(var(--secondary) / 0.9);
+  }
+
+  /* Premium Navigation */
+  .premium-nav {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 252, 0.95) 100%);
+    backdrop-filter: blur(20px) saturate(1.2);
+    border-right: 2px solid rgba(59, 130, 246, 0.1);
+    box-shadow: 4px 0 20px rgba(59, 130, 246, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+
+  [data-theme="dark"] .premium-nav {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.98) 0%, rgba(51, 65, 85, 0.95) 100%);
+    border-right: 2px solid rgba(251, 191, 36, 0.15);
+    box-shadow: 4px 0 20px rgba(15, 23, 42, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  /* Enhanced Retailer Studio card styles */
+  .studio-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+  }
+
+  .studio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  .studio-card-header {
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .studio-card-content {
+    padding: 20px 24px;
+  }
+
+  .studio-card-footer {
+    padding: 16px 24px 20px;
+    border-top: 1px solid hsl(var(--border));
+    background: hsl(var(--muted) / 0.3);
+  }
+
+  /* Premium Text Styles */
+  .text-premium {
+    color: var(--premium-text-primary);
+  }
+
+  .text-premium-secondary {
+    color: var(--premium-text-secondary);
+  }
+
+  .text-premium-accent {
+    background: var(--premium-accent-primary);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Performance Optimizations */
+  .gpu-premium {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+
+  /* Navigation Performance Optimization */
+  .nav-item-optimized {
+    transform: translateZ(0);
+    will-change: transform, opacity, box-shadow;
+    contain: layout style paint;
+  }
+
+  .nav-item-optimized:hover {
+    transform: translateZ(0) scale(1.02);
+  }
+
+  /* Redesigned Premium Cards */
+  .premium-card-redesigned {
+    will-change: transform, box-shadow;
+    contain: layout style paint;
+    border-radius: 1rem;
+  }
+
+  .premium-card-redesigned:hover {
+    will-change: transform, box-shadow;
+  }
+
+  /* Equal Height Cards */
+  .premium-grid {
+    display: grid;
+    grid-template-rows: 1fr;
+  }
+
+  .premium-grid > * {
+    height: 100%;
+  }
+
+  /* Custom Scrollbar for Premium Navigation */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(212, 175, 55, 0.3) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgba(212, 175, 55, 0.4), rgba(184, 134, 11, 0.4));
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, rgba(212, 175, 55, 0.6), rgba(184, 134, 11, 0.6));
+  }
+
+  [data-theme="dark"] .custom-scrollbar {
+    scrollbar-color: rgba(251, 191, 36, 0.4) transparent;
+  }
+
+  [data-theme="dark"] .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, rgba(251, 191, 36, 0.4), rgba(245, 158, 11, 0.4));
+  }
+
+  [data-theme="dark"] .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, rgba(251, 191, 36, 0.6), rgba(245, 158, 11, 0.6));
+  }
+}
+
+@layer utilities {
+  .text-white,
+  [class*="text-gray-"],
+  [class*="text-slate-"],
+  .text-muted-foreground {
+    color: #000 !important;
+  }
+  /* Entertainment themed pages override to maintain legibility on dark backgrounds */
+  .entertainment-theme,
+  .entertainment-theme * {
+    color: #fff !important;
+  }
+  .entertainment-theme a {
+    text-decoration: none;
+  }
+  .entertainment-theme .card,
+  .entertainment-theme .entertainment-card {
+    border-color: rgba(255, 255, 255, 0.6) !important;
+  }
+  .entertainment-theme ::placeholder {
+    color: #fff !important;
+    opacity: 0.9;
+  }
+  ::placeholder {
+    color: #000 !important;
+    opacity: 0.85;
+  }
+
+  /* Animation utilities */
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulse-orange {
+    animation: pulse-orange 2s ease-in-out infinite;
+  }
+
+  .animate-pulse-blue {
+    animation: pulse-blue 2s ease-in-out infinite;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, #f97316 25%, #3b82f6 50%, #f97316 75%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+
+  .animate-slideInLeft {
+    animation: slideInLeft 0.5s ease-out;
+  }
+
+  .animate-slideInRight {
+    animation: slideInRight 0.5s ease-out;
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  .animate-glowPulse {
+    animation: glowPulse 2s ease-in-out infinite;
+  }
+
+  .animate-cardHover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .animate-cardHover:hover {
+    animation: cardHover 0.3s ease-out forwards;
+  }
+
+  .animate-premium-float {
+    animation: premium-float 6s ease-in-out infinite;
+  }
+
+  .gold-sparkle {
+    animation: goldSparkle 2s ease-in-out infinite;
+  }
+
+  .animate-linka-shimmer {
+    animation: linka-shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-linka-pulse-brand {
+    animation: linka-pulse-brand 4s ease-in-out infinite;
+  }
+
+  .animate-linka-float {
+    animation: linka-float 6s ease-in-out infinite;
+  }
+
+  .animate-linka-glow-rotate {
+    animation: linka-glow-rotate 8s linear infinite;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .crown-glow,
+  .animate-linka-shimmer,
+  .animate-linka-pulse-brand,
+  .animate-linka-float,
+  .animate-linka-glow-rotate {
+    animation: none;
+  }
+
+  .animate-pulse {
+    animation: none;
+  }
+
+  .nav-item-optimized {
+    transition: none;
+  }
+
+  .nav-item-optimized:hover {
+    transform: none;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .premium-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .btn-premium {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Dark Mode Toggle */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --premium-bg-primary: var(--charcoal-gradient);
+    --premium-bg-secondary: var(--charcoal-dark);
+    --premium-accent-primary: var(--sunlit-gold-gradient);
+    --premium-accent-secondary: var(--emerald-glow);
+    --premium-text-primary: #f1f5f9;
+    --premium-text-secondary: #cbd5e1;
+    --premium-border: rgba(251, 191, 36, 0.2);
+  }
+}
